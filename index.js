@@ -45,8 +45,8 @@ app.post('/', (req, res) => {
           res.write('<img class="card" src="https://cdn2.bigcommerce.com/n-d57o0b/1kujmu/products/297/images/935/AS__68652.1440113599.1280.1280.png?c=2" alt="You Are Black!">');
           // res.sendFile(__dirname + "/blackCard.html");
         }
-        // res.write("red is: " + reds + ", blacks are: " + blacks);
-        // res.write(", players are: " + players);
+        res.write("red is: " + reds + ", blacks are: " + blacks);
+        res.write(", players are: " + players);
 
         if(numOfPlayers === players.length)
           res.write("<h2>All players has been logged in, please refresh to start</h2>");
