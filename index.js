@@ -52,8 +52,8 @@ app.post('/', (req, res) => {
           // res.sendFile(__dirname + "/blackCard.html");
         }
         // res.render('card', {card: card})
-        // res.write("red is: " + reds + ", blacks are: " + blacks);
-        // res.write(", players are: " + players);
+        res.write("red is: " + reds + ", blacks are: " + blacks);
+        res.write(", players are: " + players);
 
         if(numOfPlayers === players.length)
           res.write("<h2>All players has been logged in, please refresh to start</h2>");
