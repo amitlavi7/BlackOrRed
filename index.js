@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
+
+app.set('view engine', 'ejs'); //maybe 'app.use'
+
 app.use(express.static('public')); //for static files
 app.use(bodyParser.urlencoded({
   extended: true
@@ -27,6 +30,7 @@ app.post('/', (req, res) => {
     app.post(groupURL, (req, res) => {
       var playerName = req.body.playerName;
       var playerURL = groupURL + "/" + playerName;
+      var card = "";
       players.push(playerName);
       createGame(numOfPlayers);
       res.redirect(playerURL);
@@ -36,17 +40,20 @@ app.post('/', (req, res) => {
         // res.write("<h1>numOfPlayers: " + numOfPlayers + "</h1>");
         // res.write("<h1>numOfReds: " + numOfReds + "</h1>");
         if (reds.includes(playerName)){
-          // res.write("<h3>you are red!</h3>");
+          res.write("<h3>you are red!</h3>");
+          card = "Black";
           res.write('<img class="card" src="https://cdn2.bigcommerce.com/n-d57o0b/1kujmu/products/297/images/933/KH__01216.1440113580.1280.1280.png?c=2" alt="You Are Red!">');
           // res.sendFile(__dirname + "/redCard.html");
         }
         else if (blacks.includes(playerName)){
-          // res.write("<h3>you are black!</h3>");
+          res.write("<h3>you are black!</h3>");
+          card = "Red";
           res.write('<img class="card" src="https://cdn2.bigcommerce.com/n-d57o0b/1kujmu/products/297/images/935/AS__68652.1440113599.1280.1280.png?c=2" alt="You Are Black!">');
           // res.sendFile(__dirname + "/blackCard.html");
         }
-        res.write("red is: " + reds + ", blacks are: " + blacks);
-        res.write(", players are: " + players);
+        // res.render('card', {card: card})
+        // res.write("red is: " + reds + ", blacks are: " + blacks);
+        // res.write(", players are: " + players);
 
         if(numOfPlayers === players.length)
           res.write("<h2>All players has been logged in, please refresh to start</h2>");
@@ -63,9 +70,9 @@ app.post('/', (req, res) => {
 });
 
 const createGame = (numOfPlayers) => {
+  blacks = [];
+  reds = [];
   if(numOfPlayers === players.length){
-    blacks = [];
-    red = [];
     var numOfReds = 0;
     if(numOfPlayers < 6)
       numOfReds = 1;
@@ -99,6 +106,7 @@ const createGame = (numOfPlayers) => {
       // blacks.forEach(p => card("black"));
     };
     deal();
+    players = [];
   }
 }
 
