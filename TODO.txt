@@ -1,0 +1,2 @@
+FIX multiple players name (amit, Amit)
+style card page
