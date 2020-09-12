@@ -47,6 +47,7 @@ app.post('/', (req, res) => {
 
         app.get(playerURL, (req, res) => {
           res.write("<h1>" + playerName + "</h1>");
+          res.write("<h2>Please wait to all players to login, and then refresh</h2>");
           if (reds.includes(playerName)) {
             chooseCard("red");
             res.write("<h3>you are red!</h3>");
@@ -60,6 +61,9 @@ app.post('/', (req, res) => {
             res.write('<img class="card" src="https://cdn2.bigcommerce.com/n-d57o0b/1kujmu/products/297/images/935/AS__68652.1440113599.1280.1280.png?c=2" alt="You Are Black!">');
             // res.sendFile(__dirname + "/blackCard.html");
           }
+          //  else {
+          //    haltOnTimedout(req, res, playerURL);
+          // }
           // response.sendFile(__dirname + '/card.html');
           // res.render('card', {card: card})
           // res.write("red is: " + reds + ", blacks are: " + blacks);
