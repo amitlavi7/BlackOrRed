@@ -2,6 +2,7 @@
 // const alert = require('alert');
 const express = require('express');
 const bodyParser = require('body-parser');
+const ejs = require("ejs");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+const mainURL = "https://black-or-red.herokuapp.com";
 let players = [];
 let reds = [];
 let blacks = [];
@@ -27,9 +29,10 @@ app.post('/', (req, res) => {
   res.redirect(groupURL);
 
   app.get(groupURL, (request, response) => {
-
     //move to player page
-    response.sendFile(__dirname + '/player.html');
+    // response.sendFile(__dirname + '/player.html');
+    response.render('player', {url: mainURL + "" + groupURL});
+    // response.sendFile(__dirname + '/views/player.ejs');
     app.post(groupURL, (req, res) => {
       let playerName = req.body.playerName.toLowerCase();
       if (players.includes(playerName)) {
