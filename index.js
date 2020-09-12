@@ -10,16 +10,16 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-var players = [];
-var reds = [];
-var blacks = [];
-var card = "";
+let players = [];
+let reds = [];
+let blacks = [];
+let card = "";
 
 app.get('/', (req, res) => res.sendFile(__dirname + "/index.html"));
 app.post('/', (req, res) => {
-  var groupName = req.body.groupName;
-  var numOfPlayers = Number(req.body.numOfPlayers);
-  var groupURL = "/" + groupName;
+  let groupName = req.body.groupName;
+  let numOfPlayers = Number(req.body.numOfPlayers);
+  let groupURL = "/" + groupName;
 
   //move to group page
   res.redirect(groupURL);
@@ -29,8 +29,8 @@ app.post('/', (req, res) => {
     //move to player page
     response.sendFile(__dirname + '/player.html');
     app.post(groupURL, (req, res) => {
-      var playerName = req.body.playerName;
-      var playerURL = groupURL + "/" + playerName;
+      let playerName = req.body.playerName;
+      let playerURL = groupURL + "/" + playerName;
       // var card = "";
       players.push(playerName);
       createGame(numOfPlayers);
@@ -54,7 +54,7 @@ app.post('/', (req, res) => {
         }
         // response.sendFile(__dirname + '/card.html');
         // res.render('card', {card: card})
-        // res.write("red is: " + reds + ", blacks are: " + blacks);
+        res.write("red is: " + reds + ", blacks are: " + blacks);
         // res.write(", players are: " + players);
 
         if(numOfPlayers === players.length)
@@ -75,7 +75,7 @@ const createGame = (numOfPlayers) => {
   blacks = [];
   reds = [];
   if(numOfPlayers === players.length){
-    var numOfReds = 0;
+    let numOfReds = 0;
     if(numOfPlayers < 6)
       numOfReds = 1;
     else if(numOfPlayers < 8)
@@ -84,24 +84,27 @@ const createGame = (numOfPlayers) => {
       numOfReds = 3;
 
     var chooseReds = () => {
-      var redPlayerIndex;
+      let redPlayerIndex;
       while (numOfReds > 0) {
         redPlayerIndex = Math.floor(Math.random() * players.length);
-        reds.push(players[redPlayerIndex]);
-        numOfReds--;
+        let redPlayer = players[redPlayerIndex];
+        if (!reds.includes(redPlayer)){
+          reds.push(redPlayer);
+          numOfReds--;
+        }
       }
     };
 
-    var isRed = (playerName) => reds.includes(playerName);
+    let isRed = (playerName) => reds.includes(playerName);
 
-    var chooseBlacks = () => {
+    let chooseBlacks = () => {
       players.forEach(p => {
         if (!reds.includes(p))
           blacks.push(p);
       });
     };
 
-    var deal = () => {
+    let deal = () => {
       chooseReds();
       chooseBlacks();
       // reds.forEach(p => card("red"));
@@ -113,13 +116,13 @@ const createGame = (numOfPlayers) => {
 }
 
 const chooseCard = (color) => {
-  var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-  var blacks = ["clubs", "spades"];
-  var reds = ["hearts", "diamonds"];
+  let numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+  let blacks = ["clubs", "spades"];
+  let reds = ["hearts", "diamonds"];
   card = "";
 
-  var chooseShape = () => Math.floor(Math.random() * 2);
-  var chooseNumber = () => Math.floor(Math.random() * 14);
+  let chooseShape = () => Math.floor(Math.random() * 2);
+  let chooseNumber = () => Math.floor(Math.random() * 14);
 
   if(color === "black"){
     card = "blacks/" + blacks[chooseShape()] + "_" + numbers[chooseNumber()];
