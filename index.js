@@ -54,7 +54,7 @@ app.post('/', (req, res) => {
         }
         // response.sendFile(__dirname + '/card.html');
         // res.render('card', {card: card})
-        res.write("red is: " + reds + ", blacks are: " + blacks);
+        // res.write("red is: " + reds + ", blacks are: " + blacks);
         // res.write(", players are: " + players);
 
         if(numOfPlayers === players.length)
