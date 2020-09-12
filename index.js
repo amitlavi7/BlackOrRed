@@ -1,5 +1,5 @@
 // import alert from 'alert';
-const alert = require('alert');
+// const alert = require('alert');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -33,7 +33,8 @@ app.post('/', (req, res) => {
     app.post(groupURL, (req, res) => {
       let playerName = req.body.playerName.toLowerCase();
       if (players.includes(playerName)) {
-        alert('Player name is already exists, please choose another name');
+        // alert('Player name is already exists, please choose another name');
+        res.redirect(groupURL);
       } else {
         let playerURL = groupURL + "/" + playerName;
         // var card = "";
