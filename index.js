@@ -46,8 +46,8 @@ app.post('/', (req, res) => {
         res.redirect(playerURL);
 
         app.get(playerURL, (req, res) => {
-          res.write("<h1>" + playerName + "</h1>");
-          res.write("<h2>Please wait to all players to login, and then refresh</h2>");
+          res.write("<h1>" + playerName + "</h1><h2>Please wait to all players to login, and then refresh</h2>");
+          // res.write("<h2>Please wait to all players to login, and then refresh</h2>");
           if (reds.includes(playerName)) {
             chooseCard("red");
             res.write("<h3>you are red!</h3>");
