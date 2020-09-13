@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>You Are <%= card %>!</title>
-    <link rel="stylesheet" href="css/styles.css">
-  </head>
+<%- include("partials/header"); -%>
+
   <body>
-    <img class="card" src="public/images/cards/blacks/clubs_A.png" alt="You Are Black!">
+    <h1 class="title"><%= playerName %></h1>
+    <img class="card" src="/images/cards/<%= card %>.png" alt="card">
   </body>
 </html>

@@ -129,4 +129,40 @@ body {
     margin: 50px 290px;
   }
 
+  .card {
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .load-title {
+    font-family: 'Bebas Neue', cursive;
+    color: black;
+    font-size: 7rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 5%;
+    padding-bottom: 0;
+  }
+
+  .load-pic {
+    margin: 10% 35%;
+    opacity:50% ;
+    height: 25%;
+    width: 25%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .load-h3 {
+    font-size: 4rem;
+  }
+
+  .btn-load {
+    margin-left: 12%;
+  }
+
 }

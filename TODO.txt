@@ -1,4 +1,5 @@
-FIX multiple players name (amit, Amit)
 style card page
 make url bar disappear
 remove player.html
+add alert if player name is already exists
+refresh al pages after everybody logged in

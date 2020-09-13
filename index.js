@@ -1,5 +1,3 @@
-// import alert from 'alert';
-// const alert = require('alert');
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require("ejs");
@@ -30,36 +28,34 @@ app.post('/', (req, res) => {
 
   app.get(groupURL, (request, response) => {
     //move to player page
-    // response.sendFile(__dirname + '/player.html');
     response.render('player', {url: mainURL + "" + groupURL});
-    // response.sendFile(__dirname + '/views/player.ejs');
     app.post(groupURL, (req, res) => {
       let playerName = req.body.playerName.toLowerCase();
       if (players.includes(playerName)) {
-        // alert('Player name is already exists, please choose another name');
+        // if player name is already exists, refresh page - need to add alert
         res.redirect(groupURL);
       } else {
         let playerURL = groupURL + "/" + playerName;
-        // var card = "";
         players.push(playerName);
         createGame(numOfPlayers);
         res.redirect(playerURL);
 
         app.get(playerURL, (req, res) => {
-          res.write("<h1>" + playerName + "</h1><h2>Please wait to all players to login, and then refresh</h2>");
-          // res.write("<h2>Please wait to all players to login, and then refresh</h2>");
+          //res.write("<h1>" + playerName + "</h1><h2>Please wait to all players to login, and then refresh</h2>");
+          //res.render('card');
+          //res.render('loadScreen', {playerName: playerName});
           if (reds.includes(playerName)) {
             chooseCard("red");
-            res.write("<h3>you are red!</h3>");
-            // card = "red";
-            res.write('<img class="card" src="https://cdn2.bigcommerce.com/n-d57o0b/1kujmu/products/297/images/933/KH__01216.1440113580.1280.1280.png?c=2" alt="You Are Red!">');
-            // res.sendFile(__dirname + "/redCard.html");
+            res.render('card', {playerName: playerName, card: card});
+            //res.write("<h3>you are red!</h3>");
+            //res.write('<img class="card" src="https://cdn2.bigcommerce.com/n-d57o0b/1kujmu/products/297/images/933/KH__01216.1440113580.1280.1280.png?c=2" alt="You Are Red!">');
           } else if (blacks.includes(playerName)) {
             chooseCard("black");
-            res.write("<h3>you are black!</h3>");
-            // card = "Red";
-            res.write('<img class="card" src="https://cdn2.bigcommerce.com/n-d57o0b/1kujmu/products/297/images/935/AS__68652.1440113599.1280.1280.png?c=2" alt="You Are Black!">');
-            // res.sendFile(__dirname + "/blackCard.html");
+            res.render('card', {playerName: playerName, card: card});
+            //res.write("<h3>you are black!</h3>");
+            //res.write('<img class="card" src="https://cdn2.bigcommerce.com/n-d57o0b/1kujmu/products/297/images/935/AS__68652.1440113599.1280.1280.png?c=2" alt="You Are Black!">');
+          } else {
+            res.render('loadScreen', {playerName: playerName});
           }
           //  else {
           //    haltOnTimedout(req, res, playerURL);
@@ -70,14 +66,15 @@ app.post('/', (req, res) => {
           // res.write(", players are: " + players);
 
           if (numOfPlayers === players.length)
-            res.write("<h2>All players has been logged in, please refresh to start</h2>");
+            res.render('card', {playerName: playerName, card: card});
+            //res.write("<h2>All players has been logged in, please refresh to start</h2>");
           // while(numOfPlayers !== players.length){
           //   setTimeout(function () {
           //     res.redirect('back');
           //   }, 5000);
           // }
 
-          res.send();
+          //res.send();
         });
       }
     });
@@ -145,5 +142,3 @@ const chooseCard = (color) => {
 }
 
 app.listen(process.env.PORT || 3030, () => console.log("server is up"));
-
-// app.listen(3030, () => console.log("server is up on port 3030"));
