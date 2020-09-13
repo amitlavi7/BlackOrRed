@@ -3,5 +3,15 @@
   <body>
     <h1 class="title"><%= playerName %></h1>
     <img class="card" src="/images/cards/<%= card %>.png" alt="card">
+    <div class="row">
+      <div class="col-lg-2">
+        <form action="<%= groupURL %>" method="get">
+          <button type="submit" class="btn btn-dark btn-sm btn-play-again">Play Again</button>
+        </form>
+        <form action="/" method="get">
+          <button type="submit" class="btn btn-dark btn-sm btn-play-again">Start A New Game</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

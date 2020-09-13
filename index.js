@@ -41,40 +41,27 @@ app.post('/', (req, res) => {
         res.redirect(playerURL);
 
         app.get(playerURL, (req, res) => {
-          //res.write("<h1>" + playerName + "</h1><h2>Please wait to all players to login, and then refresh</h2>");
-          //res.render('card');
-          //res.render('loadScreen', {playerName: playerName});
           if (reds.includes(playerName)) {
             chooseCard("red");
-            res.render('card', {playerName: playerName, card: card});
-            //res.write("<h3>you are red!</h3>");
-            //res.write('<img class="card" src="https://cdn2.bigcommerce.com/n-d57o0b/1kujmu/products/297/images/933/KH__01216.1440113580.1280.1280.png?c=2" alt="You Are Red!">');
+            res.render('card', {
+              playerName: playerName,
+              card: card,
+              groupURL: groupURL
+            });
           } else if (blacks.includes(playerName)) {
             chooseCard("black");
-            res.render('card', {playerName: playerName, card: card});
-            //res.write("<h3>you are black!</h3>");
-            //res.write('<img class="card" src="https://cdn2.bigcommerce.com/n-d57o0b/1kujmu/products/297/images/935/AS__68652.1440113599.1280.1280.png?c=2" alt="You Are Black!">');
+            res.render('card', {
+              playerName: playerName,
+              card: card,
+              groupURL: groupURL
+            });
           } else {
             res.render('loadScreen', {playerName: playerName});
           }
-          //  else {
-          //    haltOnTimedout(req, res, playerURL);
-          // }
-          // response.sendFile(__dirname + '/card.html');
-          // res.render('card', {card: card})
-          // res.write("red is: " + reds + ", blacks are: " + blacks);
-          // res.write(", players are: " + players);
 
           if (numOfPlayers === players.length)
             res.render('card', {playerName: playerName, card: card});
-            //res.write("<h2>All players has been logged in, please refresh to start</h2>");
-          // while(numOfPlayers !== players.length){
-          //   setTimeout(function () {
-          //     res.redirect('back');
-          //   }, 5000);
-          // }
-
-          //res.send();
+            
         });
       }
     });
