@@ -175,4 +175,17 @@ body {
     margin: 10px 20%;
   }
 
+  .symbols {
+    margin-left: 35%;
+    font-size: 5rem;
+  }
+
+  .diamonds {
+    color: red;
+  }
+
+  .hearts {
+    color: red;
+  }
+
 }

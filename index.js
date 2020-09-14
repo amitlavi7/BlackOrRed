@@ -13,14 +13,17 @@ app.use(bodyParser.urlencoded({
 
 const mainURL = "https://black-or-red.herokuapp.com";
 let players = [];
-let reds = [];
-let blacks = [];
+let bads = [];
+let goods = [];
 let card = "";
 
 app.get('/', (req, res) => res.sendFile(__dirname + "/index.html"));
 app.post('/', (req, res) => {
   let groupName = req.body.groupName;
   let numOfPlayers = Number(req.body.numOfPlayers);
+  let numOfBads = Number(req.body.numOfBads);
+  let badsColor = req.body.bads;
+  let goodsColor = badsColor === "reds" ? "blacks" : "reds";
   let groupURL = "/" + groupName;
 
   //move to group page
@@ -37,19 +40,19 @@ app.post('/', (req, res) => {
       } else {
         let playerURL = groupURL + "/" + playerName;
         players.push(playerName);
-        createGame(numOfPlayers);
+        createGame(numOfPlayers, numOfBads);
         res.redirect(playerURL);
 
         app.get(playerURL, (req, res) => {
-          if (reds.includes(playerName)) {
-            chooseCard("red");
+          if (bads.includes(playerName)) {
+            chooseCard(badsColor);
             res.render('card', {
               playerName: playerName,
               card: card,
               groupURL: groupURL
             });
-          } else if (blacks.includes(playerName)) {
-            chooseCard("black");
+          } else if (goods.includes(playerName)) {
+            chooseCard(goodsColor); //goodColor
             res.render('card', {
               playerName: playerName,
               card: card,
@@ -59,53 +62,58 @@ app.post('/', (req, res) => {
             res.render('loadScreen', {playerName: playerName});
           }
 
-          if (numOfPlayers === players.length)
+          console.log("group name: " + groupName);
+          console.log("players: " + players);
+          console.log("goods: " + goods);
+          console.log("bads: " + bads);
+          console.log("bads color: " + badsColor);
+          console.log("goods color: " + goodsColor);
+
+          if (numOfPlayers === players.length){
             res.render('card', {playerName: playerName, card: card});
-            
+          }
         });
       }
     });
   });
 });
 
-const createGame = (numOfPlayers) => {
-  blacks = [];
-  reds = [];
+const createGame = (numOfPlayers, numOfBads) => {
+  goods = [];
+  bads = [];
   if (numOfPlayers === players.length) {
-    let numOfReds = 0;
-    if (numOfPlayers < 6)
-      numOfReds = 1;
-    else if (numOfPlayers < 8)
-      numOfReds = 2;
-    else
-      numOfReds = 3;
+    // let numOfReds = 0;
+    // if (numOfPlayers < 6)
+    //   numOfReds = 1;
+    // else if (numOfPlayers < 8)
+    //   numOfReds = 2;
+    // else
+    //   numOfReds = 3;
 
-    var chooseReds = () => {
-      let redPlayerIndex;
-      while (numOfReds > 0) {
-        redPlayerIndex = Math.floor(Math.random() * players.length);
-        let redPlayer = players[redPlayerIndex];
-        if (!reds.includes(redPlayer)) {
-          reds.push(redPlayer);
-          numOfReds--;
+    var chooseBads = () => {
+      let badPlayerIndex;
+      while (numOfBads > 0) {
+        badPlayerIndex = Math.floor(Math.random() * players.length);
+        let badPlayer = players[badPlayerIndex];
+        if (!bads.includes(badPlayer)) {
+          bads.push(badPlayer);
+          numOfBads--;
         }
       }
     };
 
-    let isRed = (playerName) => reds.includes(playerName);
+    let isbad = (playerName) => bads.includes(playerName);
 
-    let chooseBlacks = () => {
+    let chooseGoods = () => {
       players.forEach(p => {
-        if (!reds.includes(p))
-          blacks.push(p);
+        if (!bads.includes(p))
+          goods.push(p);
       });
     };
 
     let deal = () => {
-      chooseReds();
-      chooseBlacks();
-      // reds.forEach(p => card("red"));
-      // blacks.forEach(p => card("black"));
+      chooseBads();
+      chooseGoods();
     };
     deal();
     players = [];
@@ -121,7 +129,7 @@ const chooseCard = (color) => {
   let chooseShape = () => Math.floor(Math.random() * 2);
   let chooseNumber = () => Math.floor(Math.random() * 14);
 
-  if (color === "black") {
+  if (color === "Blacks") {
     card = "blacks/" + blacks[chooseShape()] + "_" + numbers[chooseNumber()];
   } else {
     card = "reds/" + reds[chooseShape()] + "_" + numbers[chooseNumber()];

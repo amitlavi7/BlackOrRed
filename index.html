@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Black Or Red?</title>
+  <title>Black Or Red</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <!-- My Styles -->
@@ -21,6 +21,13 @@
 
   <h1 class="title">BLACK OR RED?</h1>
 
+<div class="symbols">
+  <span class="spades">&#9824;</span>
+  <span class="diamonds">&#9670;</span>
+  <span class="clubs">&#x2663;</span>
+  <span class="hearts">&#9829;</span>
+</div>
+
   <nav class="play-form navbar navbar-light">
     <form class="form-inline" action="/" method="post">
       <input
@@ -30,10 +37,16 @@
         placeholder="Enter Group Name"
         aria-label="Search"
         pattern="[A-Za-z]{1,10}"
-        title="Group name should only contain English letters."
+        title="Group name should only contain up to 10 English letters."
         autocomplete="off"
       >
       <!-- <input class="form-control mr-sm-2" type="text" name="numOfPlayers" placeholder="Enter Number Of Players" aria-label="Search"> -->
+
+      <label class="num-title">Who's bad?:</label>
+        <select class="form-control numOfPlayers" name="bads">
+          <option>Reds</option>
+          <option>Blacks</option>
+        </select>
 
       <label class="num-title">Number Of Players:</label>
         <select class="form-control numOfPlayers" name="numOfPlayers">
@@ -45,6 +58,13 @@
           <option>8</option>
           <option>9</option>
           <option>10</option>
+        </select>
+
+      <label class="num-title">Number Of Bads:</label>
+        <select class="form-control numOfPlayers" name="numOfBads">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
         </select>
 
       <button class="btn btn-dark my-2 my-sm-0" type="submit">Play!</button>
