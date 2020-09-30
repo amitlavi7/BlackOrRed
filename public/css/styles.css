@@ -231,9 +231,9 @@ body {
   }
 
   .symbols {
-    margin-left: 330px;
-    margin-right: 340px;
-    font-size: 5rem;
+    width: 350px;
+    height: 100px;
+    margin: auto 320px;
   }
 
   .diamonds {
