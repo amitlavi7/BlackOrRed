@@ -231,7 +231,8 @@ body {
   }
 
   .symbols {
-    margin-left: 35%;
+    margin-left: 340px;
+    margin-right: 340px;
     font-size: 5rem;
   }
 
