@@ -2,7 +2,10 @@
 
   <body>
     <h1 class="title"><%= playerName %></h1>
-    <img class="card" src="/images/cards/<%= card %>.png" alt="card">
+    <!-- <figure class="swap-on-hover card"> -->
+      <!-- <img class="swap-on-hover__front-image" src="/images/cards/back.jpg" alt="card"> -->
+      <img class="swap-on-hover__back-image card" src="/images/cards/<%= card %>.png" alt="card">
+    <!-- </figure> -->
     <div class="row">
       <div class="col-lg-2">
         <form action="<%= groupURL %>" method="get">

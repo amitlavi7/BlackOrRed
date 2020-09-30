@@ -1,7 +1,11 @@
 <%- include("partials/header"); -%>
 
   <body>
-    <h1 class="title">BLACK OR RED?</h1>
+    <h1 class="title">
+      <span>BLACK</span>
+      <span class="title-or">OR</span>
+      <span class="title-red">RED?</span>
+    </h1>
     <nav class="play-form navbar navbar-light">
       <form class="form-inline" method="post">
         <input
@@ -11,7 +15,7 @@
         name="playerName"
         placeholder="Enter Your Name"
         aria-label="Search"
-        pattern="[A-Za-z]{1,10}"
+        pattern="[A-Za-z]{1,20}"
         title="Player name should only contain up to 10 English letters."
         autocomplete="off"
       >

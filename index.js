@@ -23,7 +23,7 @@ app.post('/', (req, res) => {
   let numOfPlayers = Number(req.body.numOfPlayers);
   let numOfBads = Number(req.body.numOfBads);
   let badsColor = req.body.bads;
-  let goodsColor = badsColor === "reds" ? "blacks" : "reds";
+  let goodsColor = badsColor === "Reds" ? "Blacks" : "Reds";
   let groupURL = "/" + groupName;
 
   //move to group page

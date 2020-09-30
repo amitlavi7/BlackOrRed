@@ -14,12 +14,17 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <h1 class="title">BLACK OR RED?</h1>
+  <h1 class="title">
+    <span>BLACK</span>
+    <span class="title-or">OR</span>
+    <span class="title-red">RED?</span>
+  </h1>
 
 <div class="symbols">
   <span class="spades">&#9824;</span>
@@ -36,38 +41,47 @@
         name="groupName"
         placeholder="Enter Group Name"
         aria-label="Search"
-        pattern="[A-Za-z]{1,10}"
+        pattern="[A-Za-z]{1,20}"
         title="Group name should only contain up to 10 English letters."
         autocomplete="off"
       >
       <!-- <input class="form-control mr-sm-2" type="text" name="numOfPlayers" placeholder="Enter Number Of Players" aria-label="Search"> -->
 
-      <label class="num-title">Who's bad?:</label>
-        <select class="form-control numOfPlayers" name="bads">
-          <option>Reds</option>
-          <option>Blacks</option>
-        </select>
+      <!-- <div class="options-wrapper"> -->
+        <label class="num-title">Number Of Players:</label>
+          <select class="form-control numOfPlayers" name="numOfPlayers">
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
 
-      <label class="num-title">Number Of Players:</label>
-        <select class="form-control numOfPlayers" name="numOfPlayers">
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-          <option>10</option>
-        </select>
+        <label class="num-title">Who's bad?:</label>
+          <select class="form-control bads" name="bads">
+            <option>Reds</option>
+            <option>Blacks</option>
+          </select>
 
-      <label class="num-title">Number Of Bads:</label>
-        <select class="form-control numOfPlayers" name="numOfBads">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-        </select>
 
-      <button class="btn btn-dark my-2 my-sm-0" type="submit">Play!</button>
+
+        <label class="num-title">Number Of Bads:</label>
+          <select class="form-control num-of-bads" name="numOfBads">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+      <!-- </div> -->
+
+      <div class="btn-wrapper">
+        <button class="btn btn-dark my-2 my-sm-0" type="submit">Let's Go!</button>
+        <!-- <form action="howtoplay" method="get">
+          <button type="submit" class="btn btn-dark my-2 my-sm-0">How To Play?</button>
+        </form> -->
+      </div>
     </form>
   </nav>
 

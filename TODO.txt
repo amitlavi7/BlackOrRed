@@ -1,6 +1,7 @@
 make url bar disappear
-remove player.html
 add alert if player name is already exists
-refresh al pages after everybody logged in
+refresh all pages after everybody logged in
 replace play again with deal again (no need to re enter name)
+add 'how to play' button
+add flip card option
 clean garbage!!
