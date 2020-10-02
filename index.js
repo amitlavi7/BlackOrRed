@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({
 
 const mainURL = "https://black-or-red.herokuapp.com";
 let players = [];
+let playersBackup = [];
 let bads = [];
 let goods = [];
 let card = "";
@@ -39,8 +40,13 @@ app.post('/', (req, res) => {
         res.redirect(groupURL);
       } else {
         let playerURL = groupURL + "/" + playerName;
-        players.push(playerName);
-        createGame(numOfPlayers, numOfBads);
+        if(playerName)
+          players.push(playerName);
+        ////
+        playersBackup.push(playerName);
+        ////
+        if (numOfPlayers === players.length)
+          createGame(numOfPlayers, numOfBads);
         res.redirect(playerURL);
 
         app.get(playerURL, (req, res) => {
@@ -79,9 +85,10 @@ app.post('/', (req, res) => {
 });
 
 const createGame = (numOfPlayers, numOfBads) => {
+  console.log("new game has been created!!");
   goods = [];
   bads = [];
-  if (numOfPlayers === players.length) {
+  // if (numOfPlayers === players.length) {
     // let numOfReds = 0;
     // if (numOfPlayers < 6)
     //   numOfReds = 1;
@@ -117,7 +124,6 @@ const createGame = (numOfPlayers, numOfBads) => {
     };
     deal();
     players = [];
-  }
 }
 
 const chooseCard = (color) => {
