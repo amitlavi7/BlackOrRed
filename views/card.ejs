@@ -1,20 +1,49 @@
 <%- include("partials/header"); -%>
 
-  <body>
-    <h1 class="title"><%= playerName %></h1>
-    <!-- <figure class="swap-on-hover card"> -->
-      <!-- <img class="swap-on-hover__front-image" src="/images/cards/back.jpg" alt="card"> -->
-      <img class="swap-on-hover__back-image card" src="/images/cards/<%= card %>.png" alt="card">
-    <!-- </figure> -->
-    <div class="row">
-      <div class="col-lg-2">
-        <form action="<%= groupURL %>" method="get">
-          <button type="submit" class="btn btn-dark btn-sm btn-play-again">Play Again</button>
-        </form>
-        <form action="/" method="get">
-          <button type="submit" class="btn btn-dark btn-sm btn-play-again">Start A New Game</button>
-        </form>
-      </div>
+<body>
+  <h1 class="title"><%= playerName %></h1>
+
+  <div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img class="card" src="/images/cards/back2.jpg" alt="Avatar" style="width:980px;height:1400px;">
     </div>
-  </body>
+    <div class="flip-card-back">
+      <img class="card" src="/images/cards/<%= card %>.png" alt="Avatar" style="width:980px;height:1400px;">
+    </div>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-lg-2">
+      <form action="<%= groupURL %>" method="get">
+        <button type="submit" class="btn btn-dark btn-sm btn-play-again">Play Again</button>
+      </form>
+      <form action="/" method="get">
+        <button type="submit" class="btn btn-dark btn-sm btn-new-game">Start A New Game</button>
+      </form>
+    </div>
+  </div>
+</body>
 </html>
+
+<!-- old flip -->
+
+<!-- <body>
+  <h1 class="title"><%= playerName %></h1>
+  <figure class="swap-on-hover card">
+    <img class="swap-on-hover__front-image" src="/images/cards/back2.jpg" alt="card">
+    <img class="swap-on-hover__back-image" src="/images/cards/<%= card %>.png" alt="card">
+  </figure>
+  <div class="row">
+    <div class="col-lg-2">
+      <form action="<%= groupURL %>" method="get">
+        <button type="submit" class="btn btn-dark btn-sm btn-play-again">Play Again</button>
+      </form>
+      <form action="/" method="get">
+        <button type="submit" class="btn btn-dark btn-sm btn-new-game">Start A New Game</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html> -->
