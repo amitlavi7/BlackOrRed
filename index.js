@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require("ejs");
+const shortid = require('shortid');
 
 const app = express();
 
@@ -12,109 +13,125 @@ app.use(bodyParser.urlencoded({
 }));
 
 const mainURL = "https://black-or-red.herokuapp.com";
-let players = [];
-let playersBackup = [];
-let bads = [];
-let goods = [];
-let card = "";
+let gamesData = {};
+
+// let players = [];
+// let playersBackup = [];
+// let bads = [];
+// let goods = [];
+// let card = "";
 
 app.get('/', (req, res) => res.sendFile(__dirname + "/index.html"));
+
 app.post('/', (req, res) => {
-  let groupName = req.body.groupName;
-  let numOfPlayers = Number(req.body.numOfPlayers);
-  let numOfBads = Number(req.body.numOfBads);
-  let badsColor = req.body.bads;
-  let goodsColor = badsColor === "Reds" ? "Blacks" : "Reds";
-  let groupURL = "/" + groupName;
+  //add validations
+  const gameID = shortid.generate();
+  const gameData = {
+    groupName: req.body.groupName,
+    numOfPlayers: Number(req.body.numOfPlayers),
+    numOfBads: Number(req.body.numOfBads),
+    badsColor: req.body.bads,
+    goodsColor: req.body.bads === "Reds" ? "Blacks" : "Reds",
+    groupURL: "/" + gameID,
+    players: [],
+    bads: [],
+    goods: []
+  };
+
+  gamesData[gameID] = gameData;
 
   //move to group page
-  res.redirect(groupURL);
-
-  app.get(groupURL, (request, response) => {
-    //move to player page
-    response.render('player', {url: mainURL + "" + groupURL});
-    app.post(groupURL, (req, res) => {
-      let playerName = req.body.playerName.toLowerCase();
-      if (players.includes(playerName)) {
-        // if player name is already exists, refresh page - need to add alert
-        res.redirect(groupURL);
-      } else {
-        let playerURL = groupURL + "/" + playerName;
-        if(playerName)
-          players.push(playerName);
-        ////
-        playersBackup.push(playerName);
-        ////
-        if (numOfPlayers === players.length)
-          createGame(numOfPlayers, numOfBads);
-        res.redirect(playerURL);
-
-        app.get(playerURL, (req, res) => {
-          if (bads.includes(playerName)) {
-            chooseCard(badsColor);
-            res.render('card', {
-              playerName: playerName,
-              card: card,
-              groupURL: groupURL
-            });
-          } else if (goods.includes(playerName)) {
-            chooseCard(goodsColor); //goodColor
-            res.render('card', {
-              playerName: playerName,
-              card: card,
-              groupURL: groupURL
-            });
-          } else {
-            res.render('loadScreen', {playerName: playerName});
-          }
-
-          console.log("group name: " + groupName);
-          console.log("players: " + players);
-          console.log("goods: " + goods);
-          console.log("bads: " + bads);
-          console.log("bads color: " + badsColor);
-          console.log("goods color: " + goodsColor);
-
-          if (numOfPlayers === players.length){
-            res.render('card', {playerName: playerName, card: card});
-          }
-        });
-      }
-    });
-  });
+  res.redirect(gameData.groupURL);
 });
 
-const createGame = (numOfPlayers, numOfBads) => {
-  console.log("new game has been created!!");
-  goods = [];
-  bads = [];
-  // if (numOfPlayers === players.length) {
-    // let numOfReds = 0;
-    // if (numOfPlayers < 6)
-    //   numOfReds = 1;
-    // else if (numOfPlayers < 8)
-    //   numOfReds = 2;
-    // else
-    //   numOfReds = 3;
+  //move to player page
+app.get('/:groupID', (req, res) => {
+  const groupID = req.params.groupID;
+  res.render('player', {url: mainURL + "/" + groupID});
+});
 
+app.post('/:groupID', (req, res) => {
+  const groupID = req.params.groupID;
+  let playerName = req.body.playerName.toLowerCase();
+  const gameInfo = gamesData[groupID];
+
+  // if player name is already exists, refresh page - need to add alert
+  if (gameInfo.players.includes(playerName)) {
+    res.redirect(gameInfo.groupURL);
+  } else {
+    let playerURL = gameInfo.groupURL + "/" + playerName;
+    if(playerName)
+      gameInfo.players.push(playerName);
+    ////
+    // playersBackup.push(playerName);
+    ////
+    // console.log(gamesData);
+    if(gameInfo.numOfPlayers === gameInfo.players.length)
+      createGame(gameInfo);
+    res.redirect(playerURL);
+  }
+});
+
+app.get('/:groupID/:playerName', (req, res) => {
+  let card;
+  const playerName = req.params.playerName;
+  const groupID = req.params.groupID;
+  const gameInfo = gamesData[groupID];
+  console.log(gamesData);
+  if (gameInfo.bads.includes(playerName)) {
+    card = chooseCard(gameInfo.badsColor);
+    res.render('card', {
+      playerName: playerName,
+      card: card,
+      createGame: createGame,
+      gameInfo: gameInfo
+    });
+    // res.render('card', {
+    //   playerName: playerName,
+    //   card: card,
+    //   groupURL: gameInfo.groupURL
+    // });
+  } else if (gameInfo.goods.includes(playerName)) {
+    card = chooseCard(gameInfo.goodsColor); //goodColor
+    res.render('card', {
+      playerName: playerName,
+      card: card,
+      createGame: createGame,
+      gameInfo: gameInfo
+    });
+    // res.render('card', {
+    //   playerName: playerName,
+    //   card: card,
+    //   groupURL: gameInfo.groupURL
+    // });
+  } else {
+    res.render('loadScreen', {playerName: playerName});
+  }
+});
+
+const createGame = (gameInfo) => {
+  console.log("new game has been created!!");
+  console.log(gameInfo);
+  gameInfo.goods = [];
+  gameInfo.bads = [];
     var chooseBads = () => {
       let badPlayerIndex;
-      while (numOfBads > 0) {
-        badPlayerIndex = Math.floor(Math.random() * players.length);
-        let badPlayer = players[badPlayerIndex];
-        if (!bads.includes(badPlayer)) {
-          bads.push(badPlayer);
-          numOfBads--;
+      for(let i = 0; i < gameInfo.numOfBads; i++) {
+        badPlayerIndex = Math.floor(Math.random() * gameInfo.players.length);
+        let badPlayer = gameInfo.players[badPlayerIndex];
+        if (!gameInfo.bads.includes(badPlayer)) {
+          gameInfo.bads.push(badPlayer);
+          // gameInfo.numOfBads--;
         }
       }
     };
 
-    let isbad = (playerName) => bads.includes(playerName);
+    let isbad = (playerName) => gameInfo.bads.includes(playerName);
 
     let chooseGoods = () => {
-      players.forEach(p => {
-        if (!bads.includes(p))
-          goods.push(p);
+      gameInfo.players.forEach(p => {
+        if (!gameInfo.bads.includes(p))
+          gameInfo.goods.push(p);
       });
     };
 
@@ -123,7 +140,7 @@ const createGame = (numOfPlayers, numOfBads) => {
       chooseGoods();
     };
     deal();
-    players = [];
+    gameInfo.players = [];
 }
 
 const chooseCard = (color) => {
@@ -136,10 +153,12 @@ const chooseCard = (color) => {
   let chooseNumber = () => Math.floor(Math.random() * 14);
 
   if (color === "Blacks") {
-    card = "blacks/" + blacks[chooseShape()] + "_" + numbers[chooseNumber()];
+    return "blacks/" + blacks[chooseShape()] + "_" + numbers[chooseNumber()];
   } else {
-    card = "reds/" + reds[chooseShape()] + "_" + numbers[chooseNumber()];
+    return "reds/" + reds[chooseShape()] + "_" + numbers[chooseNumber()];
   }
 }
 
 app.listen(process.env.PORT || 3030, () => console.log("server is up"));
+
+module.export = {createGame: createGame};

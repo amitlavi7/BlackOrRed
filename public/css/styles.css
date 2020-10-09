@@ -342,6 +342,18 @@ body {
     width: 100%;
   }
 
+  .winking-king {
+    position: relative;
+    overflow: hidden;
+    height: 50%;
+    width: 50%;
+    margin-top: 800px;
+    margin-left: 300px;
+    transform: rotate(-25deg);
+    -webkit-transform: rotate(-25deg);
+    -moz-transform: rotate(-25deg);
+  }
+
   .row {
     margin: 10px 20%;
   }

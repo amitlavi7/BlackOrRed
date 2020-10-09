@@ -21,6 +21,7 @@
     "moment": "^2.29.0",
     "query-string": "^6.13.4",
     "request": "^2.88.2",
+    "shortid": "^2.2.15",
     "window-popup": "^1.1.0"
   }
 }
