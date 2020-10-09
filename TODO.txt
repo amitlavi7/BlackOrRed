@@ -1,7 +1,9 @@
 make url bar disappear
-add option to play multiple games at the same time
 add alert if player name is already exists
 refresh all pages after everybody logged in
 replace play again with deal again (no need to re enter name)
 add 'how to play' button
+add validations
+remove group name?
+
 clean garbage!!

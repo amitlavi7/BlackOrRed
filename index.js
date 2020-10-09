@@ -15,13 +15,9 @@ app.use(bodyParser.urlencoded({
 const mainURL = "https://black-or-red.herokuapp.com";
 let gamesData = {};
 
-// let players = [];
-// let playersBackup = [];
-// let bads = [];
-// let goods = [];
-// let card = "";
-
 app.get('/', (req, res) => res.sendFile(__dirname + "/index.html"));
+
+app.get('/howtoplay', (req, res) => res.sendFile(__dirname + "/howToPlay.html"));
 
 app.post('/', (req, res) => {
   //add validations
@@ -62,10 +58,6 @@ app.post('/:groupID', (req, res) => {
     let playerURL = gameInfo.groupURL + "/" + playerName;
     if(playerName)
       gameInfo.players.push(playerName);
-    ////
-    // playersBackup.push(playerName);
-    ////
-    // console.log(gamesData);
     if(gameInfo.numOfPlayers === gameInfo.players.length)
       createGame(gameInfo);
     res.redirect(playerURL);
@@ -121,7 +113,6 @@ const createGame = (gameInfo) => {
         let badPlayer = gameInfo.players[badPlayerIndex];
         if (!gameInfo.bads.includes(badPlayer)) {
           gameInfo.bads.push(badPlayer);
-          // gameInfo.numOfBads--;
         }
       }
     };
@@ -147,7 +138,6 @@ const chooseCard = (color) => {
   let numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
   let blacks = ["clubs", "spades"];
   let reds = ["hearts", "diamonds"];
-  card = "";
 
   let chooseShape = () => Math.floor(Math.random() * 2);
   let chooseNumber = () => Math.floor(Math.random() * 14);

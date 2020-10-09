@@ -26,74 +26,48 @@
     <span class="title-red">RED?</span>
   </h1>
 
-<!-- <div class="symbols"> -->
-  <!-- <span class="spades">&#9824;</span>
-  <span class="diamonds">&#9670;</span>
-  <span class="clubs">&#x2663;</span>
-  <span class="hearts">&#9829;</span> -->
   <img class="symbols" src="images/symbols.jpg" alt="symbols">
-<!-- </div> -->
 
   <nav class="play-form navbar navbar-light">
     <form class="form-inline" action="/" method="post">
-      <input
-        class="form-control mr-sm-2"
-        type="text"
-        name="groupName"
-        placeholder="Enter Group Name"
-        aria-label="Search"
-        pattern="[A-Za-z]{1,20}"
-        title="A group's name can only contain up to 20 English letters."
-        autocomplete="off"
-      >
-      <!-- <input class="form-control mr-sm-2" type="text" name="numOfPlayers" placeholder="Enter Number Of Players" aria-label="Search"> -->
+      <input class="form-control mr-sm-2" type="text" name="groupName" placeholder="Enter Group Name" aria-label="Search" pattern="[A-Za-z]{1,20}" title="A group's name can only contain up to 20 English letters." autocomplete="off">
 
-      <!-- <div class="options-wrapper"> -->
-        <label class="num-title">Number Of Players:</label>
-          <select class="form-control numOfPlayers" name="numOfPlayers">
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-          </select>
+      <label class="num-title">Number Of Players:</label>
+      <select class="form-control numOfPlayers" name="numOfPlayers">
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
 
-        <label class="num-title">Who's The Villains?:</label>
-          <select class="form-control bads" name="bads">
-            <option>Reds</option>
-            <option>Blacks</option>
-          </select>
+      <label class="num-title">Who's The Villains?:</label>
+      <select class="form-control bads" name="bads">
+        <option>Reds</option>
+        <option>Blacks</option>
+      </select>
 
-
-
-        <label class="num-title">Number Of Villains:</label>
-          <select class="form-control num-of-bads" name="numOfBads">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-          </select>
-      <!-- </div> -->
+      <label class="num-title">Number Of Villains:</label>
+      <select class="form-control num-of-bads" name="numOfBads">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+      </select>
 
       <div class="btn-wrapper">
         <button class="btn btn-dark my-2 my-sm-0" type="submit">Let's Go!</button>
-        <!-- <form action="howtoplay" method="get">
-          <button type="submit" class="btn btn-dark my-2 my-sm-0">How To Play?</button>
-        </form> -->
       </div>
+    </form>
+    <form action="/howtoplay" method="get">
+      <button class="btn btn-dark my-2 my-sm-0 btn-howto">How To Play?</button>
     </form>
   </nav>
 
-  <!-- <img class="winking-king" src="images/winking-king.gif" alt=""> -->
+  <img class="winking-king" src="images/winking-king.gif" alt="">
 
-  <!-- <form class="form-inline" action="/" method="post">
-    <label for="groupInput">Group Name: </label>
-    <input id="groupInput" type="text" name="groupName">
-    <button type="submit">Play!</button>
-  </form> -->
-  <!-- <script src="index.js" charset="utf-8"></script> -->
 </body>
 
 </html>
