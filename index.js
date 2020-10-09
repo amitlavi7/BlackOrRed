@@ -80,30 +80,30 @@ app.get('/:groupID/:playerName', (req, res) => {
   console.log(gamesData);
   if (gameInfo.bads.includes(playerName)) {
     card = chooseCard(gameInfo.badsColor);
-    res.render('card', {
-      playerName: playerName,
-      card: card,
-      createGame: createGame,
-      gameInfo: gameInfo
-    });
     // res.render('card', {
     //   playerName: playerName,
     //   card: card,
-    //   groupURL: gameInfo.groupURL
+    //   createGame: createGame,
+    //   gameInfo: gameInfo
     // });
+    res.render('card', {
+      playerName: playerName,
+      card: card,
+      groupURL: gameInfo.groupURL
+    });
   } else if (gameInfo.goods.includes(playerName)) {
     card = chooseCard(gameInfo.goodsColor); //goodColor
-    res.render('card', {
-      playerName: playerName,
-      card: card,
-      createGame: createGame,
-      gameInfo: gameInfo
-    });
     // res.render('card', {
     //   playerName: playerName,
     //   card: card,
-    //   groupURL: gameInfo.groupURL
+    //   createGame: createGame,
+    //   gameInfo: gameInfo
     // });
+    res.render('card', {
+      playerName: playerName,
+      card: card,
+      groupURL: gameInfo.groupURL
+    });
   } else {
     res.render('loadScreen', {playerName: playerName});
   }
