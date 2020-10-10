@@ -1,92 +1,109 @@
-body {
-  background-color: #d8d3cd;
-  display: block;
-}
- .navbar-brand {
-   font-family: 'Bebas Neue', cursive;
-   color: black;
-   font-size: 2rem;
-   font-weight: bold;
- }
-
- .navbar-brand:hover {
-   color: red;
- }
-
- .nav-link {
-    color: black;
-    font-weight: bold;
- }
-
- .nav-link:hover {
-   color: red;
- }
-
- .bg-drak {
-   background-color: #797a7e;
- }
-
- .title {
-   font-family: 'Bebas Neue', cursive;
-   color: black;
-   font-size: 5rem;
-   font-weight: bold;
-   text-align: center;
-   padding: 5%;
-   padding-bottom: 0;
- }
-
- .title:hover {
-   color: red;
- }
-
- .title-or {
-   color: grey;
- }
-
- .title-red {
-   color: red;
- }
-
- .play-form {
-   margin: auto 40%;
-   text-align: center;
- }
-
- .form-control-file, .form-control-range {
-     display: block;
-     width: 77%;
- }
-
- .btn {
-   width: 200px;
-   font-family: 'Bebas Neue', cursive;
- }
-
- .numOfPlayers {
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-left: 180px;
-  margin-bottom: 1px;
- }
-
- .fa-whatsapp {
-   font-size: 1.5rem;
- }
-
-.whatsapp-share {
-  color: grey;
-  text-decoration: none;
-  margin: 10px;
-  padding-left: 10%;
+.phone{
+  position: absolute;
+  z-index: 9999;
 }
 
-.whatsapp-share:hover {
-  text-decoration: none;
-  color: grey;
+.hide-on-web {
+  visibility: hidden;
 }
 
 @media (max-width: 1028px) {
+  .hide-on-web {
+    visibility: visible;
+  }
+
+  .phone{
+    visibility: hidden;
+  }
+
+  body {
+    background-color: #d8d3cd;
+    display: block;
+  }
+   .navbar-brand {
+     font-family: 'Bebas Neue', cursive;
+     color: black;
+     font-size: 2rem;
+     font-weight: bold;
+   }
+
+   .navbar-brand:hover {
+     color: red;
+   }
+
+   .nav-link {
+      color: black;
+      font-weight: bold;
+   }
+
+   .nav-link:hover {
+     color: red;
+   }
+
+   .bg-drak {
+     background-color: #797a7e;
+   }
+
+   .title {
+     font-family: 'Bebas Neue', cursive;
+     color: black;
+     font-size: 5rem;
+     font-weight: bold;
+     text-align: center;
+     padding: 5%;
+     padding-bottom: 0;
+   }
+
+   .title:hover {
+     color: red;
+   }
+
+   .title-or {
+     color: grey;
+   }
+
+   .title-red {
+     color: red;
+   }
+
+   .play-form {
+     margin: auto 40%;
+     text-align: center;
+   }
+
+   .form-control-file, .form-control-range {
+       display: block;
+       width: 77%;
+   }
+
+   .btn {
+     width: 200px;
+     font-family: 'Bebas Neue', cursive;
+   }
+
+   .numOfPlayers {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 180px;
+    margin-bottom: 1px;
+   }
+
+   .fa-whatsapp {
+     font-size: 1.5rem;
+   }
+
+  .whatsapp-share {
+    color: grey;
+    text-decoration: none;
+    margin: 10px;
+    padding-left: 10%;
+  }
+
+  .whatsapp-share:hover {
+    text-decoration: none;
+    color: grey;
+  }
+  /* ---------------------------------- */
   .title {
     font-size: 10rem;
   }
