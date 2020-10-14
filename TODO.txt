@@ -1,9 +1,10 @@
-make url bar disappear
-add alert if player name is already exists
-refresh all pages after everybody logged in
-replace play again with deal again (no need to re enter name)
-add 'how to play' button
-add validations
-remove group name?
+- make url bar disappear
+- add alert if player name is already exists
+- refresh all pages after everybody logged in
+    add timeout
+- add loader
+- replace play again with deal again (no need to re enter name)
+- add validations
+- remove group name?
 
 clean garbage!!

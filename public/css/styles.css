@@ -178,6 +178,10 @@
     margin: 50px 290px;
   }
 
+  #loader {
+    visibility: hidden;
+  }
+
   /* flip card */
   /* .swap-on-hover {
     position: relative;
@@ -329,7 +333,9 @@
   }
 
   .load-pic {
-    margin: 10% 35%;
+    margin: 20% 35%;
+    margin-left: 370px;
+    margin-top: 0px;
     opacity:50% ;
     height: 25%;
     width: 25%;

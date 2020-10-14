@@ -1,27 +1,37 @@
 <%- include("partials/header"); -%>
 
   <body>
-    <h1 class="title">
-      <span>BLACK</span>
-      <span class="title-or">OR</span>
-      <span class="title-red">RED?</span>
-    </h1>
-    <nav class="play-form navbar navbar-light">
-      <form class="form-inline" method="post">
-        <input
-          id="name"
-          class="form-control mr-sm-2"
-          type="text"
-          name="playerName"
-          placeholder="Enter Your Name"
-          aria-label="Search"
-          pattern="[A-Za-z]{1,20}"
-          title="A player's name can only contain up to 20 English letters."
-          autocomplete="off"
-        >
-        <button class="btn btn-dark my-2 my-sm-0" type="submit">Play!</button>
-      </form>
-      <a class="whatsapp-share" href="whatsapp://send?text=<%= url %>"><i class="fab fa-whatsapp"></i>  Invite Your Friends!</a>
-    </nav>
+    <div id="page">
+      <h1 class="title">
+        <span>BLACK</span>
+        <span class="title-or">OR</span>
+        <span class="title-red">RED?</span>
+      </h1>
+      <nav class="play-form navbar navbar-light">
+        <form class="form-inline" method="post">
+          <input
+            id="name"
+            class="form-control mr-sm-2"
+            type="text"
+            name="playerName"
+            placeholder="Enter Your Name"
+            aria-label="Search"
+            pattern="[A-Za-z]{1,20}"
+            title="A player's name can only contain up to 20 English letters."
+            autocomplete="off"
+          >
+          <button class="btn btn-dark my-2 my-sm-0" type="submit" onclick="toggleLoder()">Play!</button>
+        </form>
+        <a class="whatsapp-share" href="whatsapp://send?text=<%= url %>"><i class="fab fa-whatsapp"></i>  Invite Your Friends!</a>
+      </nav>
+    </div>
+
+    <div id="loader">
+      <h1 id="loadTitle" class="load-title">please wait for other players</h1>
+      <img id="loadPic" class="load-pic" src="/images/loading.gif" alt="load">
+    </div>
+
+    <script src="js/toggleLoader.js" charset="utf-8"></script>
+
   </body>
 </html>

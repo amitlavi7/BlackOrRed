@@ -5,9 +5,11 @@ const shortid = require('shortid');
 
 const app = express();
 
-app.set('view engine', 'ejs'); //maybe 'app.use'
+app.set('view engine', 'ejs');
 
-app.use(express.static('public')); //for static files
+// app.use(express.static('public')); //for static files
+app.use("/", express.static(__dirname + "/public")); //for static files
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -31,7 +33,8 @@ app.post('/', (req, res) => {
     groupURL: "/" + gameID,
     players: [],
     bads: [],
-    goods: []
+    goods: [],
+    openResponses: []
   };
 
   gamesData[gameID] = gameData;
@@ -58,19 +61,39 @@ app.post('/:groupID', (req, res) => {
     let playerURL = gameInfo.groupURL + "/" + playerName;
     if(playerName)
       gameInfo.players.push(playerName);
-    if(gameInfo.numOfPlayers === gameInfo.players.length)
+    if(gameIsReady(gameInfo)){
       createGame(gameInfo);
+
+      // refresh is working but cant "play again"
+
+      // gameInfo.openResponses.forEach(response => {
+      //   response.res.redirect(response.playerURL);
+      // });
+      const tempResponses = gameInfo.openResponses;
+      gameInfo.openResponses = [];
+      tempResponses.forEach(response => {
+        response.res.redirect(response.playerURL);
+      });
+    }
     res.redirect(playerURL);
   }
 });
 
 app.get('/:groupID/:playerName', (req, res) => {
+
+  //add timeout?
+
   let card;
   const playerName = req.params.playerName;
   const groupID = req.params.groupID;
   const gameInfo = gamesData[groupID];
+  const playerURL = "/" + groupID + "/" + playerName;
+
   console.log(gamesData);
+
   if (gameInfo.bads.includes(playerName)) {
+    const index = gameInfo.bads.indexOf(playerName);
+    gameInfo.bads[index] = undefined;
     card = chooseCard(gameInfo.badsColor);
     // res.render('card', {
     //   playerName: playerName,
@@ -84,6 +107,8 @@ app.get('/:groupID/:playerName', (req, res) => {
       groupURL: gameInfo.groupURL
     });
   } else if (gameInfo.goods.includes(playerName)) {
+    const index = gameInfo.goods.indexOf(playerName);
+    gameInfo.goods[index] = undefined;
     card = chooseCard(gameInfo.goodsColor); //goodColor
     // res.render('card', {
     //   playerName: playerName,
@@ -97,9 +122,18 @@ app.get('/:groupID/:playerName', (req, res) => {
       groupURL: gameInfo.groupURL
     });
   } else {
-    res.render('loadScreen', {playerName: playerName});
+    gameInfo.openResponses.push({
+      res,
+      playerURL
+    });
+    // document.getElementById('page').visible = false;
+    // document.getElementById('loader').visible = true;
+    // console.log(gameInfo.responses.length, "********", gameInfo.groupName);
+    // res.render('loadScreen', {playerName: playerName});
   }
 });
+
+const gameIsReady = (gameInfo) => gameInfo.numOfPlayers === gameInfo.players.length;
 
 const createGame = (gameInfo) => {
   console.log("new game has been created!!");
