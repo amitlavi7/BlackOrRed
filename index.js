@@ -132,11 +132,13 @@ const createGame = (gameInfo) => {
   gameInfo.bads = [];
     var chooseBads = () => {
       let badPlayerIndex;
-      for(let i = 0; i < gameInfo.numOfBads; i++) {
+      let badCount = gameInfo.numOfBads;
+      while(badCount != 0) {
         badPlayerIndex = Math.floor(Math.random() * gameInfo.players.length);
         let badPlayer = gameInfo.players[badPlayerIndex];
         if (!gameInfo.bads.includes(badPlayer)) {
           gameInfo.bads.push(badPlayer);
+          badCount--;
         }
       }
     };
@@ -164,7 +166,7 @@ const chooseCard = (color) => {
   let reds = ["hearts", "diamonds"];
 
   let chooseShape = () => Math.floor(Math.random() * 2);
-  let chooseNumber = () => Math.floor(Math.random() * 14);
+  let chooseNumber = () => Math.floor(Math.random() * 13);
 
   if (color === "Blacks") {
     return "blacks/" + blacks[chooseShape()] + "_" + numbers[chooseNumber()];
