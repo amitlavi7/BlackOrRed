@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require("ejs");
 const shortid = require('shortid');
-const timeout = require('connect-timeout');
+// const timeout = require('connect-timeout');
+const DelayedResponse = require("http-delayed-response")
 
 const app = express();
 
@@ -15,8 +16,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(timeout('600s'));
-app.use(haltOnTimedout);
+// app.use(timeout('600s'));
+// app.use(haltOnTimedout);
 
 const mainURL = "https://black-or-red.herokuapp.com";
 let gamesData = {};
@@ -70,6 +71,7 @@ app.post('/:groupID', (req, res) => {
       const tempResponses = gameInfo.openResponses;
       gameInfo.openResponses = [];
       tempResponses.forEach(response => {
+        // response.delayed.stop();
         response.res.redirect(response.playerURL);
       });
     }
@@ -120,10 +122,25 @@ app.get('/:groupID/:playerName', (req, res) => {
       groupURL: gameInfo.groupURL
     });
   } else {
-    gameInfo.openResponses.push({
-      res,
-      playerURL
-    });
+    // app.use(function (req, res) {
+      let delayed = new DelayedResponse(req, res);
+      // pushResponses(delayed);
+      gameInfo.openResponses.push({
+        res,
+        delayed,
+        playerURL
+      });
+      delayed.on('heartbeat', () => { });
+      delayed.start(1000);
+
+    // const pushResponses = (delay) => {
+    //     delay.start();
+    //     gameInfo.openResponses.push({
+    //     res,
+    //     delay,
+    //     playerURL
+    //   });
+    // }
   }
 });
 

@@ -17,6 +17,7 @@
     "default-user-agent": "^1.0.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "http-delayed-response": "0.0.4",
     "ip": "^1.1.5",
     "moment": "^2.29.0",
     "nodemon": "^2.0.5",
