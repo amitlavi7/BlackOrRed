@@ -1,10 +1,9 @@
 - make url bar disappear
 - add alert if player name is already exists
-- refresh all pages after everybody logged in
-    add timeout
-- add loader
+- add timeout to long polling???
 - replace play again with deal again (no need to re enter name)
 - add validations
 - remove group name?
+- delete loadScreen.ejs
 
 clean garbage!!

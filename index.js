@@ -63,12 +63,6 @@ app.post('/:groupID', (req, res) => {
       gameInfo.players.push(playerName);
     if(gameIsReady(gameInfo)){
       createGame(gameInfo);
-
-      // refresh is working but cant "play again"
-
-      // gameInfo.openResponses.forEach(response => {
-      //   response.res.redirect(response.playerURL);
-      // });
       const tempResponses = gameInfo.openResponses;
       gameInfo.openResponses = [];
       tempResponses.forEach(response => {
@@ -126,10 +120,6 @@ app.get('/:groupID/:playerName', (req, res) => {
       res,
       playerURL
     });
-    // document.getElementById('page').visible = false;
-    // document.getElementById('loader').visible = true;
-    // console.log(gameInfo.responses.length, "********", gameInfo.groupName);
-    // res.render('loadScreen', {playerName: playerName});
   }
 });
 
@@ -169,7 +159,7 @@ const createGame = (gameInfo) => {
 }
 
 const chooseCard = (color) => {
-  let numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+  let numbers = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
   let blacks = ["clubs", "spades"];
   let reds = ["hearts", "diamonds"];
 
