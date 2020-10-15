@@ -130,7 +130,9 @@ app.get('/:groupID/:playerName', (req, res) => {
         delayed,
         playerURL
       });
-      delayed.on('heartbeat', () => { });
+      delayed.on('heartbeat', () => {
+        console.log("*");
+       });
       delayed.start(1000);
 
     // const pushResponses = (delay) => {
