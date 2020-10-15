@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require("ejs");
 const shortid = require('shortid');
+const timeout = require('connect-timeout');
 
 const app = express();
 
@@ -13,6 +14,9 @@ app.use("/", express.static(__dirname + "/public")); //for static files
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.use(timeout('600s'));
+app.use(haltOnTimedout);
 
 const mainURL = "https://black-or-red.herokuapp.com";
 let gamesData = {};
@@ -173,6 +177,10 @@ const chooseCard = (color) => {
   } else {
     return "reds/" + reds[chooseShape()] + "_" + numbers[chooseNumber()];
   }
+}
+
+function haltOnTimedout (req, res, next) {
+  if (!req.timedout) next()
 }
 
 app.listen(process.env.PORT || 3030, () => console.log("server is up"));
