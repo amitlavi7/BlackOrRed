@@ -66,7 +66,7 @@ app.post('/:groupID', (req, res) => {
     let playerURL = gameInfo.groupURL + "/" + playerName;
     if(playerName)
       gameInfo.players.push(playerName);
-    if(gameIsReady(gameInfo)){
+    if(isGameReady(gameInfo)){
       createGame(gameInfo);
       const tempResponses = gameInfo.openResponses;
       gameInfo.openResponses = [];
@@ -133,7 +133,7 @@ app.get('/:groupID/:playerName', (req, res) => {
       delayed.on('heartbeat', () => {
         console.log("*");
        });
-      delayed.start(1000);
+      delayed.start(10);
 
     // const pushResponses = (delay) => {
     //     delay.start();
@@ -146,7 +146,7 @@ app.get('/:groupID/:playerName', (req, res) => {
   }
 });
 
-const gameIsReady = (gameInfo) => gameInfo.numOfPlayers === gameInfo.players.length;
+const isGameReady = (gameInfo) => gameInfo.numOfPlayers === gameInfo.players.length;
 
 const createGame = (gameInfo) => {
   console.log("new game has been created!!");
